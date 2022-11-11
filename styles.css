@@ -1,0 +1,798 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins";
+  user-select: none;
+  scroll-behavior: smooth;
+  color: var(--text-color);
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  overflow-y: auto !important ;
+}
+
+:root {
+  --text-color: #fff;
+  --link-text-color: #2f2f2f;
+
+  --temp-icon-color: #fff;
+
+  --meal-width: 320px;
+}
+
+::-webkit-scrollbar {
+  background-color: #353535;
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #575757;
+  border-radius: 5px;
+}
+
+.screen {
+  width: 100%;
+  position: absolute;
+  opacity: 0;
+  transition: 0.6s ease;
+  pointer-events: none;
+}
+
+.screen.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.image {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  transition: 0.4s ease;
+}
+
+.image.blur {
+  filter: blur(5px);
+  scale: 1.2;
+}
+
+.lock-screen__data {
+  position: fixed;
+  bottom: 0;
+  margin: 30px 70px;
+  display: flex;
+  align-items: flex-end;
+  transition: 0.4s ease;
+}
+
+.lock-screen__data.move {
+  transform: translateX(-110%);
+  opacity: 0;
+}
+
+.lock-screen__data .data__time,
+.menu-screen__data .data__time {
+  font-size: 7rem;
+  font-weight: 500;
+}
+
+.lock-screen__data .data__temp,
+.menu-screen__data .data__temp {
+  display: flex;
+  margin-left: 20px;
+}
+
+.lock-screen__data .data__temp .temp__icon,
+.menu-screen__data .data__temp .temp__icon {
+  font-size: 30px;
+  margin-top: 3px;
+  color: var(--temp-icon-color);
+}
+
+.lock-screen__data .data__temp .temp,
+.menu-screen__data .data__temp .temp {
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+  margin-left: 5px;
+  text-align: center;
+}
+
+.lock-screen__data .data__temp small,
+.menu-screen__data .data__temp small {
+  margin-left: 3px;
+}
+
+.lock-screen__data .data__temp small:last-child,
+.menu-screen__data .data__temp small:last-child {
+  font-size: 1.1rem;
+}
+
+.lock-screen__login-button,
+.menu-screen__logout-button {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  width: 200px;
+  height: 70px;
+  position: fixed;
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  bottom: 70px;
+  transition: 0.4s ease;
+}
+
+.lock-screen__login-button {
+  right: 0;
+  margin: 0 70px;
+}
+
+.lock-screen__login-button:hover,
+.lock-screen__login-button:focus,
+.menu-screen__logout-button:hover,
+.menu-screen__logout-button:focus {
+  transition: 0.1s ease;
+  background: rgba(255, 255, 255, 0.15);
+  border: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.lock-screen__login-button.move {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.password-screen {
+  position: fixed;
+}
+
+.password__fields {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  min-height: 100vh;
+}
+
+.password__field {
+  position: relative;
+  width: 110px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  font-size: 5rem;
+  transition: 0.1s ease;
+  font-size: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.password__field.invalid {
+  background: rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(244, 38, 38, 0.8);
+}
+
+.password__field.current-input::before {
+  content: "";
+  width: 70px;
+  height: 4px;
+  position: absolute;
+  bottom: 10px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  animation: white-line 2s ease infinite;
+}
+
+@keyframes white-line {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.password__pin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  width: 100%;
+}
+
+.password__pin h2 {
+  font-weight: 500;
+}
+
+.password__pin p {
+  margin-left: 10px;
+  font-size: 1.4rem;
+  color: var(--link-text-color);
+  cursor: pointer;
+}
+
+.password__pin p:hover {
+  text-decoration: underline;
+}
+
+.menu-screen {
+  background: linear-gradient(to bottom, transparent, rgba(18, 18, 18, 0.9));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 150px;
+}
+
+.menu-screen__data {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 72%;
+}
+
+.menu-screen__data div {
+  display: flex;
+  justify-content: space-between;
+  transition: 0.4s ease;
+}
+
+.menu-screen__data div.move {
+  translate: -20% 0;
+  opacity: 0;
+}
+
+.menu-screen__logout-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.menu-screen__logout-button.move {
+  transition: 0.4s ease;
+  translate: 150% 0;
+  opacity: 0;
+}
+
+.menu-screen .notifications,
+.menu-screen .tags,
+.menu-screen .socials {
+  display: flex;
+  gap: 10px;
+  width: max-content;
+  margin-top: 20px;
+}
+
+.notifications__notification {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  transition: 0.1s ease;
+}
+
+.tags__tag,
+.socials__social {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  backdrop-filter: blur(5px);
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.1s ease;
+  padding: 10px 20px;
+}
+
+.menu-screen .notifications.move,
+.menu-screen .tags.move,
+.menu-screen .socials.move {
+  transition: 0.6s ease;
+  translate: -20% 0;
+  opacity: 0;
+}
+
+.tags__tag:hover,
+.socials__social:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.notifications__notification i,
+.socials__social i {
+  font-size: 1.2rem;
+  margin-right: 10px;
+}
+
+.notifications__notification i {
+  cursor: pointer;
+}
+
+.notifications__notification span {
+  color: #000;
+  font-size: 1rem;
+  margin-left: 10px;
+}
+
+.tags__tag p {
+  text-align: center;
+}
+
+.socials__social {
+  text-decoration: none;
+}
+
+.socials__social i {
+  font-size: 2rem;
+}
+
+.menu-screen__sections {
+  margin-top: 50px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section {
+  margin-top: 50px;
+  width: 90%;
+  transition: 0.4s ease;
+}
+
+.section.move {
+  transform: scale(0);
+  opacity: 0;
+}
+
+.section > div:not(.section__title) {
+  margin-top: 20px;
+}
+
+.section:last-of-type {
+  margin-bottom: 100px;
+}
+
+.section__title {
+  display: flex;
+  align-items: center;
+}
+
+.section__title h2 {
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+.section__title i {
+  margin-right: 10px;
+  font-size: 1.3rem;
+}
+
+.weather-forecast__weather {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+  overflow-x: auto;
+  cursor: grab;
+}
+
+.weather__weather-box {
+  width: 180px;
+  height: 180px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  transition: 0.2s ease;
+}
+
+.weather__weather-box div {
+  display: flex;
+  position: absolute;
+  top: 30px;
+}
+
+.weather__weather-box small {
+  margin-top: -2px;
+  font-size: 0.7rem;
+}
+
+.weather__weather-box small:first-of-type {
+  margin-left: 2px;
+}
+
+.weather__weather-box img {
+  width: 50px;
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  transition: 0.2s ease;
+}
+
+.weather__weather-box h3 {
+  font-weight: 500;
+  position: absolute;
+  bottom: 30px;
+}
+
+.weather__weather-box:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.weather__weather-box:hover img {
+  transform: translateY(-5px);
+}
+
+.meals__meals {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 1rem;
+}
+
+.meals__meal {
+  overflow: hidden;
+  width: var(--meal-width);
+  width: 100%;
+  height: 220px;
+  border-radius: 0.5rem;
+  box-shadow: 2px 2px 20px 1px rgba(0, 0, 0, 0.5);
+  position: relative;
+  transition: 0.2s ease;
+  grid-column: span 2;
+}
+
+.meals__meal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8));
+  z-index: 1;
+}
+
+.meals__meal img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  scale: 1.3;
+}
+
+.meal__content {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  text-align: right;
+  margin: 10px 20px;
+  z-index: 2;
+  transition: 0.2s ease;
+}
+
+.meal__content h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.meal__content p {
+  color: #42a5f5;
+}
+
+.meals__meal:hover {
+  transform: translateY(-5px);
+}
+
+.meals__meal:hover::before {
+  top: 5px;
+}
+
+.meals__meal:hover .meal__content {
+  transform: translateY(-10px);
+}
+
+.whats-appening__content {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+}
+
+.whats-appening__box {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  grid-column: span 2;
+  cursor: pointer;
+  transition: 0.2s ease;
+  position: relative;
+}
+
+.whats-appening__box:nth-child(1) {
+  background-position: bottom;
+}
+
+.whats-appening__box:last-child,
+.whats-appening__box:nth-child(3) {
+  background-position-y: center;
+}
+
+.whats-appening__box-content {
+  backdrop-filter: grayscale(100%) brightness(30%);
+  width: 102%;
+  height: 102%;
+  transition: 0.2s ease;
+  padding: 25px;
+}
+
+.whats-appening__box-content i {
+  font-size: 2.5rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 25px;
+}
+
+.whats-appening__box-content span {
+  text-transform: uppercase;
+  color: #42a5f5;
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.whats-appening__box-content h3 {
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+.whats-appening__box:hover {
+  transform: translateY(-3px);
+}
+
+.whats-appening__box:hover .whats-appening__box-content {
+  backdrop-filter: grayscale(0%) brightness(30%);
+}
+
+.popcorn-time__movies {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  scroll-snap-type: x mandatory;
+  overflow-x: auto;
+}
+
+.popcorn-time__movie-card {
+  width: 330px;
+  height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  transition: 0.2s ease;
+  cursor: pointer;
+  scroll-snap-align: start;
+}
+
+.popcorn-time__movie-card img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  transition: 0.2s ease;
+}
+
+.movie-card__content {
+  position: relative;
+  height: 100%;
+  z-index: 3;
+  padding: 2rem;
+}
+
+.popcorn-time__movie-card h3 {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.popcorn-time__movie-card p {
+  color: #c9c9c9;
+  margin-top: 5px;
+}
+
+.popcorn-time__movie-card i {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 2rem;
+  font-size: 3.5rem;
+  transition: 0.2s ease;
+}
+
+.popcorn-time__movie-card:hover {
+  transform: translateY(-5px);
+}
+
+.popcorn-time__movie-card:hover img {
+  transform: scale(1.05);
+}
+
+.popcorn-time__movie-card:hover i {
+  font-size: 6rem;
+}
+
+@media screen and (max-width: 1600px) {
+  .lock-screen__login-button {
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+  .lock-screen__login-button.move {
+    translate: 0 200%;
+    opacity: 0;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .lock-screen__login-button {
+    right: 0;
+    transform: translate(-50%, 0);
+    bottom: 0;
+  }
+  .lock-screen__login-button.move {
+    translate: 100% 0;
+    opacity: 0;
+  }
+  .menu-screen__logout-button {
+    width: 70px;
+  }
+  .meals__meals {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .whats-appening__content {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .menu-screen .notifications {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .meals__meals {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .meals__meal,
+  .meals__meal:last-of-type {
+    grid-column: span 2;
+    width: 100%;
+  }
+
+  .meals.section {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 920px) {
+  .lock-screen__login-button,
+  .menu-screen__logout-button {
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
+  }
+  .menu-screen .notifications {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .menu-screen .tags {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .notifications {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .meals__meals {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .whats-appening__content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .menu-screen__logout-button {
+    position: relative;
+  }
+  .lock-screen .data__time,
+  .menu-screen .data__time {
+    font-size: 3rem;
+  }
+  .lock-screen .data__temp {
+    position: relative;
+    transform: translateY(10px);
+  }
+  .lock-screen .data__temp .temp__icon {
+    font-size: 1.2rem;
+  }
+  .lock-screen .data__temp .temp {
+    font-size: 1.5rem;
+  }
+  .lock-screen .data__temp small:last-child {
+    font-size: 0.9rem;
+  }
+  .password__field {
+    width: 80px;
+    height: 110px;
+    transition: 0.1s ease;
+    font-size: 3rem;
+  }
+  .password__field.current-input::before {
+    width: 50px;
+  }
+  .password__pin {
+    font-size: 0.8rem;
+  }
+  .password__pin p {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .menu-screen .tags,
+  .menu-screen .socials {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .lock-screen__data {
+    left: 50%;
+    transform: translate(-80%, -70px);
+  }
+  .menu-screen .tags,
+  .menu-screen .socials {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .lock-screen__login-button {
+    left: 50%;
+    transform: translate(-50%, -30px);
+  }
+  .password__pin {
+    margin-top: 80px;
+    font-size: 0.7rem;
+  }
+  .password__pin p {
+    font-size: 1rem;
+  }
+}

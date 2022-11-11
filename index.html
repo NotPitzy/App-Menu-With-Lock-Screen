@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>App Menu With Lock Screen</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/ed64d234be.js" crossorigin="anonymous"></script>
+
+    <script type="module" src="scripts.js" defer></script>
+</head>
+<body>
+    <img class="image" src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2076&q=80" data-background></img>
+
+    <div class="lock-screen screen show" data-lock-screen-page>
+        <div class="lock-screen__data" data-lock-screen-data>
+            <h1 class="data__time" data-lock-screen-time></h1>
+            <div class="data__temp">
+                <i class="temp__icon" data-lock-screen-temp-icon></i>
+                <h1 class="temp" data-lock-screen-temp></h1>
+                <small>°</small>
+                <small>C</small>
+            </div>
+        </div>
+        <button class="lock-screen__login-button" data-lock-screen-button>
+            <i class='bx bx-log-in-circle' ></i>
+        </button>
+    </div>
+
+    <div class="password-screen screen" data-password-screen-page>
+        <div class="password__fields" data-password-screen-inputs>
+            <div class="password__field current-input"></div>
+            <div class="password__field"></div>
+            <div class="password__field"></div>
+            <div class="password__field"></div>
+        </div>
+        <div class="password__pin">
+            <h2 data-password-pin>Enter PIN</h2>
+            <p data-cancel-password>Cancel</p>
+        </div>
+    </div>
+
+    <div class="menu-screen screen" data-menu-screen-page>
+        <div class="menu-screen__data">
+            <div data-menu-screen-data>
+                <div>
+                    <h1 class="data__time" data-menu-screen-time></h1>
+                    <div class="data__temp">
+                        <i class="temp__icon" data-menu-screen-temp-icon></i>
+                        <h1 class="temp" data-menu-screen-temp></h1>
+                        <small>°</small>
+                        <small>C</small>
+                    </div>
+                </div>
+            </div>
+            <button class="menu-screen__logout-button" data-menu-screen-button>
+                <i class='bx bx-log-out-circle' ></i>
+            </button>
+            <div class="notifications" data-menu-screen-notifications>
+            </div>
+            <div class="tags" data-menu-screen-tags>
+            </div>
+            <div class="socials" data-menu-screen-socials>
+            </div>
+        </div>
+        <div class="menu-screen__sections">
+            <section class="weather-forecast section" data-section>
+                <div class="section__title">
+                    <i class="bx bxs-sun"></i>
+                    <h2>How's it look out there?</h2>
+                </div>
+                <div class="weather-forecast__weather" data-weather-forecast>
+                </div>
+            </section>
+            <section class="meals section" data-section>
+                <div class="section__title">
+                    <i class="bx bx-bowl-hot"></i>
+                    <h2>Get it delivered!</h2>
+                </div>
+                <div class="meals__meals" data-menu-meals></div>
+            </section>
+            <section class="whats-appening section" data-section>
+                <div class="section__title">
+                    <i class='bx bx-briefcase'></i>
+                    <h2>What's Appening?</h2>
+                </div>
+                <div class="whats-appening__content" data-whats-appening>
+                </div>
+            </section>
+            <section class="popcorn-time section" data-section>
+                <div class="section__title">
+                    <i class='bx bxs-camera-movie' ></i>
+                    <h2>Popcorn time!</h2>
+                </div>
+                <div class="popcorn-time__movies" data-popcorn-time>
+
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
