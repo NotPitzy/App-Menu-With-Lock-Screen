@@ -9,43 +9,11 @@ import {
 } from "./data/index.js";
 
 const sections = document.querySelectorAll("[data-section]");
-
 const background = document.querySelector("[data-background]");
 
-const lockScreenPage = document.querySelector("[data-lock-screen-page]");
-const passwordScreenPage = document.querySelector(
-  "[data-password-screen-page]"
-);
-const menuScreenPage = document.querySelector("[data-menu-screen-page]");
-
-const lockScreenData = document.querySelector("[data-lock-screen-data]");
-const lockScreenTime = document.querySelector("[data-lock-screen-time]");
-const lockScreenTemp = document.querySelector("[data-lock-screen-temp]");
-const lockScreenTempIcon = document.querySelector(
-  "[data-lock-screen-temp-icon]"
-);
-const lockScreenButton = document.querySelector("[data-lock-screen-button]");
-
-const passwordScreenInputs = document.querySelector(
-  "[data-password-screen-inputs]"
-);
-
-const menuScreenData = document.querySelector("[data-menu-screen-data]");
-const menuScreenTime = document.querySelector("[data-menu-screen-time]");
-const menuScreenTemp = document.querySelector("[data-menu-screen-temp]");
-const menuScreenTempIcon = document.querySelector(
-  "[data-menu-screen-temp-icon]"
-);
-const menuScreenButton = document.querySelector("[data-menu-screen-button]");
-const menuNotificationsEl = document.querySelector(
-  "[data-menu-screen-notifications]"
-);
-const menuTagsEl = document.querySelector("[data-menu-screen-tags]");
-const menuSocialsEl = document.querySelector("[data-menu-screen-socials]");
-const weatherForecastEl = document.querySelector("[data-weather-forecast]");
-const menuMealsEl = document.querySelector("[data-menu-meals]");
-const menuWhatsAppeningEl = document.querySelector("[data-whats-appening]");
-const menuMovieCardsEl = document.querySelector("[data-popcorn-time]");
+const lockScreenEl = document.querySelector("[data-lock-screen]");
+const passwordScreenEl = document.querySelector("[data-password-screen]");
+const menuScreenEl = document.querySelector("[data-menu-screen]");
 
 const pin = Math.floor(Math.random() * 9000) + 1000;
 
@@ -57,7 +25,9 @@ const meals = Array.from(mealsData);
 const whatsAppening = Array.from(whatsAppeningData);
 const movieCards = Array.from(movieCardsData);
 
-const passwordInputsChildren = Array.from(passwordScreenInputs.children);
+const passwordInputsChildren = Array.from(
+  passwordScreenEl.querySelector("[data-password-screen-inputs]").children
+);
 
 let time = new Date();
 let hour = time.getHours() < 10 ? `0${time.getHours()}` : time.getHours();
@@ -82,8 +52,12 @@ function checkTemp() {
 }
 
 function sunnyTemp() {
-  lockScreenTempIcon.classList.add("bx", "bx-sun");
-  menuScreenTempIcon.classList.add("bx", "bx-sun");
+  lockScreenEl
+    .querySelector("[data-lock-screen-temp-icon]")
+    .classList.add("bx", "bx-sun");
+  menuScreenEl
+    .querySelector("[data-menu-screen-temp-icon]")
+    .classList.add("bx", "bx-sun");
 
   document
     .querySelector("body")
@@ -91,8 +65,12 @@ function sunnyTemp() {
 }
 
 function cloudyTemp() {
-  lockScreenTempIcon.classList.add("bx", "bx-cloud");
-  menuScreenTempIcon.classList.add("bx", "bx-cloud");
+  lockScreenEl
+    .querySelector("[data-lock-screen-temp-icon]")
+    .classList.add("bx", "bx-cloud");
+  menuScreenEl
+    .querySelector("[data-menu-screen-temp-icon]")
+    .classList.add("bx", "bx-cloud");
 
   document
     .querySelector("body")
@@ -100,8 +78,12 @@ function cloudyTemp() {
 }
 
 function rainyTemp() {
-  lockScreenTempIcon.classList.add("bx", "bx-cloud-rain");
-  menuScreenTempIcon.classList.add("bx", "bx-cloud-rain");
+  lockScreenEl
+    .querySelector("[data-lock-screen-temp-icon]")
+    .classList.add("bx", "bx-cloud-rain");
+  menuScreenEl
+    .querySelector("[data-menu-screen-temp-icon]")
+    .classList.add("bx", "bx-cloud-rain");
 
   document
     .querySelector("body")
@@ -109,8 +91,12 @@ function rainyTemp() {
 }
 
 function snowyTemp() {
-  lockScreenTempIcon.classList.add("bx", "bx-cloud-snow");
-  menuScreenTempIcon.classList.add("bx", "bx-cloud-snow");
+  lockScreenEl
+    .querySelector("[data-lock-screen-temp-icon]")
+    .classList.add("bx", "bx-cloud-snow");
+  menuScreenEl
+    .querySelector("[data-menu-screen-temp-icon]")
+    .classList.add("bx", "bx-cloud-snow");
 
   document
     .querySelector("body")
@@ -123,25 +109,35 @@ function lockScreen() {
     if (index != 0) {
       element.classList.remove("current-input");
     }
-    passwordScreenInputs.children[0].classList.add("current-input");
+    passwordScreenEl
+      .querySelector("[data-password-screen-inputs]")
+      .children[0].classList.add("current-input");
   });
   currentInput = 0;
 
   background.classList.remove("blur");
 
-  lockScreenPage.classList.add("show");
-  passwordScreenPage.classList.remove("show");
-  menuScreenPage.classList.remove("show");
+  lockScreenEl.classList.add("show");
+  passwordScreenEl.classList.remove("show");
+  menuScreenEl.classList.remove("show");
 
-  menuScreenButton.classList.add("move");
-  lockScreenButton.classList.remove("move");
+  menuScreenEl.querySelector("[data-menu-screen-button]").classList.add("move");
+  lockScreenEl
+    .querySelector("[data-lock-screen-button]")
+    .classList.remove("move");
 
-  menuNotificationsEl.classList.add("move");
-  menuTagsEl.classList.add("move");
-  menuSocialsEl.classList.add("move");
+  menuScreenEl
+    .querySelector("[data-menu-screen-notifications]")
+    .classList.add("move");
+  menuScreenEl.querySelector("[data-menu-screen-tags]").classList.add("move");
+  menuScreenEl
+    .querySelector("[data-menu-screen-socials]")
+    .classList.add("move");
 
-  lockScreenData.classList.remove("move");
-  menuScreenData.classList.add("move");
+  lockScreenEl
+    .querySelector("[data-lock-screen-data]")
+    .classList.remove("move");
+  menuScreenEl.querySelector("[data-menu-screen-data]").classList.add("move");
 
   sections.forEach((section) => {
     section.classList.add("move");
@@ -151,29 +147,39 @@ function lockScreen() {
 function passwordScreen() {
   background.classList.add("blur");
 
-  lockScreenPage.classList.remove("show");
-  menuScreenPage.classList.remove("show");
-  passwordScreenPage.classList.add("show");
+  lockScreenEl.classList.remove("show");
+  menuScreenEl.classList.remove("show");
+  passwordScreenEl.classList.add("show");
 
-  lockScreenButton.classList.add("move");
+  lockScreenEl.querySelector("[data-lock-screen-button]").classList.add("move");
 
-  lockScreenData.classList.add("move");
+  lockScreenEl.querySelector("[data-lock-screen-data]").classList.add("move");
 }
 
 function menuScreen() {
   background.classList.remove("blur");
 
-  lockScreenPage.classList.remove("show");
-  passwordScreenPage.classList.remove("show");
-  menuScreenPage.classList.add("show");
+  lockScreenEl.classList.remove("show");
+  passwordScreenEl.classList.remove("show");
+  menuScreenEl.classList.add("show");
 
-  menuScreenButton.classList.remove("move");
+  menuScreenEl
+    .querySelector("[data-menu-screen-button]")
+    .classList.remove("move");
 
-  menuNotificationsEl.classList.remove("move");
-  menuTagsEl.classList.remove("move");
-  menuSocialsEl.classList.remove("move");
+  menuScreenEl
+    .querySelector("[data-menu-screen-notifications]")
+    .classList.remove("move");
+  menuScreenEl
+    .querySelector("[data-menu-screen-tags]")
+    .classList.remove("move");
+  menuScreenEl
+    .querySelector("[data-menu-screen-socials]")
+    .classList.remove("move");
 
-  menuScreenData.classList.remove("move");
+  menuScreenEl
+    .querySelector("[data-menu-screen-data]")
+    .classList.remove("move");
 
   sections.forEach((section) => {
     section.classList.remove("move");
@@ -193,15 +199,19 @@ function checkPage() {
 checkPage();
 checkTemp();
 
-lockScreenButton.addEventListener("click", () => {
-  page = "password screen";
-  checkPage();
-});
+lockScreenEl
+  .querySelector("[data-lock-screen-button]")
+  .addEventListener("click", () => {
+    page = "password screen";
+    checkPage();
+  });
 
-menuScreenButton.addEventListener("click", () => {
-  page = "lock screen";
-  checkPage();
-});
+menuScreenEl
+  .querySelector("[data-menu-screen-button]")
+  .addEventListener("click", () => {
+    page = "lock screen";
+    checkPage();
+  });
 
 document.addEventListener("keydown", (e) => {
   if (page != "password screen") {
@@ -254,8 +264,12 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-lockScreenTime.innerText = `${hour}:${minute}`;
-menuScreenTime.innerText = `${hour}:${minute}`;
+lockScreenEl.querySelector(
+  "[data-lock-screen-time]"
+).innerText = `${hour}:${minute}`;
+menuScreenEl.querySelector(
+  "[data-menu-screen-time]"
+).innerText = `${hour}:${minute}`;
 setInterval(() => {
   time = new Date();
 
@@ -264,11 +278,16 @@ setInterval(() => {
   let hour = time.getHours() < 10 ? `0${time.getHours()}` : time.getHours();
   let minute =
     time.getMinutes() < 10 ? `0${time.getMinutes()}` : time.getMinutes();
-  lockScreenTime.innerText = `${hour}:${minute}`;
-  menuScreenTime.innerText = `${hour}:${minute}`;
+  lockScreen.querySelector(
+    "[data-lock-screen-time]"
+  ).innerText = `${hour}:${minute}`;
+  menuScreenEl.querySelector(
+    "[data-menu-screen-time]"
+  ).innerText = `${hour}:${minute}`;
 }, 1000);
-lockScreenTemp.innerText = temp;
-menuScreenTemp.innerText = temp;
+
+lockScreenEl.querySelector("[data-lock-screen-temp]").innerText = temp;
+menuScreenEl.querySelector("[data-menu-screen-temp]").innerText = temp;
 
 document.querySelector("[data-password-pin]").textContent += ` (${pin})`;
 document
@@ -279,7 +298,7 @@ document
   });
 
 notifications.forEach((notification) => {
-  menuNotificationsEl.innerHTML += `
+  menuScreenEl.querySelector("[data-menu-screen-notifications]").innerHTML += `
   <div class="notifications__notification">
   <i class="bx bx-bell"></i>
   <p>${notification.name}</p>
@@ -290,7 +309,9 @@ notifications.forEach((notification) => {
   `;
 });
 
-const menuNotificationsChildren = Array.from(menuNotificationsEl.children);
+const menuNotificationsChildren = Array.from(
+  menuScreenEl.querySelector("[data-menu-screen-notifications]").children
+);
 
 menuNotificationsChildren.forEach((element, index) => {
   let icon = element.children[0];
@@ -311,7 +332,7 @@ menuNotificationsChildren.forEach((element, index) => {
 });
 
 tags.forEach((tag) => {
-  menuTagsEl.innerHTML += `
+  menuScreenEl.querySelector("[data-menu-screen-tags]").innerHTML += `
     <div class="tags__tag">
       <p>${tag}</p>
     </div>
@@ -319,7 +340,7 @@ tags.forEach((tag) => {
 });
 
 socials.forEach((social) => {
-  menuSocialsEl.innerHTML += `
+  menuScreenEl.querySelector("[data-menu-screen-socials]").innerHTML += `
     <a href="${social.link}" target="_blank" class="socials__social">
       <i class="bx ${social.icon}" style="color: ${social.color}"></i>
       <p>${social.name}</p>
@@ -343,7 +364,7 @@ for (let j = 0; j < days.length; j++) {
 }
 
 arrangedWeather.forEach((item, index) => {
-  weatherForecastEl.innerHTML += `
+  menuScreenEl.querySelector("[data-weather-forecast]").innerHTML += `
     <div class="weather__weather-box">
       <div><p>${item.temp}</p><small>°</small><small>C</small></div>
       <img src="assets/${item.img}.png" />
@@ -353,7 +374,7 @@ arrangedWeather.forEach((item, index) => {
 });
 
 meals.forEach((meal) => {
-  menuMealsEl.innerHTML += `
+  menuScreenEl.querySelector("[data-menu-meals]").innerHTML += `
     <div class="meals__meal">
       <img src="./assets/${meal.img}.jpg" />
       <div class="meal__content">
@@ -365,7 +386,7 @@ meals.forEach((meal) => {
 });
 
 whatsAppening.forEach((item) => {
-  menuWhatsAppeningEl.innerHTML += `
+  menuScreenEl.querySelector("[data-whats-appening]").innerHTML += `
     <div class="whats-appening__box" style="background-image: url('./assets/${item.img}.jpg')">
       <div class="whats-appening__box-content">
       <span>${item.tag}</span>
@@ -375,7 +396,7 @@ whatsAppening.forEach((item) => {
 });
 
 movieCards.forEach((card, index) => {
-  menuMovieCardsEl.innerHTML += `
+  menuScreenEl.querySelector("[data-popcorn-time]").innerHTML += `
     <div class="popcorn-time__movie-card">
       <img src="./assets/movie${index + 1}.jpg" />
       <div class="movie-card__content" style="background: linear-gradient(to bottom, transparent 70%, ${
