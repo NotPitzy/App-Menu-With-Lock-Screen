@@ -11,6 +11,7 @@
 }
 
 body {
+  width: 100%;
   height: 100vh;
   overflow: hidden;
   overflow-y: auto !important ;
@@ -66,10 +67,16 @@ body {
   scale: 1.2;
 }
 
-.lock-screen__data {
+.lock-screen {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: fixed;
   bottom: 0;
-  margin: 30px 70px;
+  padding: 0 70px;
+}
+
+.lock-screen__data {
   display: flex;
   align-items: flex-end;
   transition: 0.4s ease;
@@ -126,20 +133,13 @@ body {
   border-radius: 50px;
   width: 200px;
   height: 70px;
-  position: fixed;
   font-size: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   outline: none;
-  bottom: 70px;
   transition: 0.4s ease;
-}
-
-.lock-screen__login-button {
-  right: 0;
-  margin: 0 70px;
 }
 
 .lock-screen__login-button:hover,
@@ -649,23 +649,7 @@ body {
   font-size: 6rem;
 }
 
-@media screen and (max-width: 1600px) {
-  .lock-screen__login-button {
-    left: 50%;
-    transform: translate(-50%, 0);
-  }
-  .lock-screen__login-button.move {
-    translate: 0 200%;
-    opacity: 0;
-  }
-}
-
-@media screen and (max-width: 1300px) {
-  .lock-screen__login-button {
-    right: 0;
-    transform: translate(-50%, 0);
-    bottom: 0;
-  }
+@media (max-width: 1300px) {
   .lock-screen__login-button.move {
     translate: 100% 0;
     opacity: 0;
@@ -681,7 +665,7 @@ body {
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media (max-width: 1200px) {
   .menu-screen .notifications {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -700,7 +684,7 @@ body {
   }
 }
 
-@media screen and (max-width: 920px) {
+@media (max-width: 920px) {
   .lock-screen__login-button,
   .menu-screen__logout-button {
     width: 50px;
@@ -715,13 +699,13 @@ body {
   }
 }
 
-@media screen and (max-width: 850px) {
+@media (max-width: 850px) {
   .notifications {
     flex-direction: column;
   }
 }
 
-@media screen and (max-width: 720px) {
+@media (max-width: 720px) {
   .meals__meals {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -730,7 +714,7 @@ body {
   }
 }
 
-@media screen and (max-width: 600px) {
+@media (max-width: 600px) {
   .menu-screen__logout-button {
     position: relative;
   }
@@ -768,25 +752,20 @@ body {
   }
 }
 
-@media screen and (max-width: 500px) {
+@media (max-width: 500px) {
   .menu-screen .tags,
   .menu-screen .socials {
     flex-direction: column;
   }
 }
 
-@media screen and (max-width: 450px) {
-  .lock-screen__data {
-    left: 50%;
-    transform: translate(-80%, -70px);
+@media (max-width: 450px) {
+  .lock-screen {
+    padding: 0px 10px;
   }
   .menu-screen .tags,
   .menu-screen .socials {
     grid-template-columns: repeat(1, 1fr);
-  }
-  .lock-screen__login-button {
-    left: 50%;
-    transform: translate(-50%, -30px);
   }
   .password__pin {
     margin-top: 80px;
